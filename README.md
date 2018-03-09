@@ -28,6 +28,6 @@
 >><br>--Choose a Web to finish Web Crawling and upload three types of files（.R, .Rmd, .html）
 
 ### At home:
->-practice R
+>-practice R programming
 >>--[R語言導論](https://goo.gl/nmBF4t)
 >><br>--[資料框整理技巧](https://goo.gl/Qrc77S)
