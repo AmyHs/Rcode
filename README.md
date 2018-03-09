@@ -25,7 +25,7 @@
 ><br>-Introduce to Crawler
 ><br>-Practice for week 2 homework
 >>--Upload a folder named week_2
->><br>--Choose a Web to finish Web Crawling and uploaed three types of files（.R, .Rmd, .html）
+>><br>--Choose a Web to finish Web Crawling and upload three types of files（.R, .Rmd, .html）
 
 ### At home:
 >-practice R
