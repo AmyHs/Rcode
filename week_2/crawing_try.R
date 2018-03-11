@@ -1,0 +1,5 @@
+install.packages("rvest")
+library(rvest)
+doc <-read_html("http://www.bbc.com/news/entertainment_and_arts")
+x_1<-doc %>% html_nodes(".pigeon__column--a , .faux-block-link__overlay-link")%>% html_attr("href")
+x_2<-doc %>% html_nodes(".pigeon__column--a , .faux-block-link__overlay-link") %>% html_text() 
