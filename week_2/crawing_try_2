@@ -1,0 +1,5 @@
+## R crawer
+  library(rvest)
+  bbcread<-read_html("http://www.bbc.com/news/entertainment_and_arts")
+  x_2<-bbcread %>% html_nodes(".title-link__title-text") %>% html_text() 
+  bbcTitle<-data.frame(bbc_news_title=x_2)
