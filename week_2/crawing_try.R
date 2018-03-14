@@ -1,8 +1,0 @@
-install.packages("rvest")
-library(rvest)
-doc <-read_html("http://www.bbc.com/news/entertainment_and_arts")
-bbcWS<-doc %>% html_nodes(".pigeon__column--a , .faux-block-link__overlay-link")%>% html_attr("href")
-bbcText<-doc %>% html_nodes(".pigeon__column--a , .faux-block-link__overlay-link") %>% html_text() 
-bbc_Title<-data.frame(bbctitle=bbcText,website=bbcWS,stringsAsFactors = F)
-View(bbc_Title)
-View(bbc_Title)
