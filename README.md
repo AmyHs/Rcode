@@ -37,6 +37,7 @@
 >><br>--[超簡單爬蟲教學-使用R軟體的rvest套件抓網站資料](http://brucehau.blogspot.tw/2016/09/rrvest.html)
 >><br>--[第一次爬蟲就上手 rvest_tutorial](https://rpubs.com/SatoshiLiang/159348)
 >><br>--**未完** [r網路爬蟲](http://www.hmwu.idv.tw/web/R/D02-hmwu_R-Crawler.pdf)
+>><br>--**未完**[網路爬蟲入門](https://rstudio-pubs-static.s3.amazonaws.com/226877_056a6e4bdd734563a7405752e6fb83bc.html#(16))
 >><br>--**未完** [rvest](https://www.rdocumentation.org/packages/rvest/versions/0.3.2)
 
 >-Rmarkdown
