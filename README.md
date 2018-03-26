@@ -43,3 +43,26 @@
 >-Rmarkdown
 >>--[以 R Markdown 輕鬆編輯資料分析報告](https://goo.gl/emKDgD)
 >><br>--[Markdown文件](http://markdown.tw/#em)
+
+
+##  WEEK 4
+
+### In class:
+>-open API
+><br>-文本清理
+><br>-文字雲
+><br>-共學解決程式問題
+
+### At home:
+>-Scrape with fb API
+>>--[使用 R 分析 Facebook 社群網路教學](https://blog.gtwang.org/r/facebook-social-media-mining-with-r/)
+>><br>--**未完**[R_Facebook_crawler_text_mining_Rstudio](https://kangliping.wordpress.com/2017/04/27/r_text_mining_fanpage_rstudio/)
+
+>-R Text Mining
+>>--**未完**[An introduction to data cleaning with R](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
+>><br>--[用R進行中文 text Mining](http://rstudio-pubs-static.s3.amazonaws.com/12422_b2b48bb2da7942acaca5ace45bd8c60c.html)
+>><br>--[R文本挖掘之tm包](http://yphuang.github.io/blog/2016/03/04/text-mining-tm-package/)
+>><br>--[R 文字探勘概略筆記 by jiebaR](http://kanchengzxdfgcv.blogspot.tw/2017/04/r-by-jiebar.html)
+
+>-wordcloud
+>>--[Package ‘wordcloud’](https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf)
