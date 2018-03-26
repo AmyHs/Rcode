@@ -63,6 +63,7 @@
 >><br>--[用R進行中文 text Mining](http://rstudio-pubs-static.s3.amazonaws.com/12422_b2b48bb2da7942acaca5ace45bd8c60c.html)
 >><br>--[R文本挖掘之tm包](http://yphuang.github.io/blog/2016/03/04/text-mining-tm-package/)
 >><br>--[R 文字探勘概略筆記 by jiebaR](http://kanchengzxdfgcv.blogspot.tw/2017/04/r-by-jiebar.html)
+>><br>--[R语言中文分词包jiebaR](http://blog.fens.me/r-word-jiebar/)
 
 >-wordcloud
 >>--[Package ‘wordcloud’](https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf)
