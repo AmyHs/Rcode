@@ -37,7 +37,7 @@
 >><br>--[超簡單爬蟲教學-使用R軟體的rvest套件抓網站資料](http://brucehau.blogspot.tw/2016/09/rrvest.html)
 >><br>--[第一次爬蟲就上手 rvest_tutorial](https://rpubs.com/SatoshiLiang/159348)
 >><br>--**未完** [r網路爬蟲](http://www.hmwu.idv.tw/web/R/D02-hmwu_R-Crawler.pdf)
->><br>--**未完**[網路爬蟲入門](https://rstudio-pubs-static.s3.amazonaws.com/226877_056a6e4bdd734563a7405752e6fb83bc.html#(16))
+>><br>--**未完** [網路爬蟲入門](https://rstudio-pubs-static.s3.amazonaws.com/226877_056a6e4bdd734563a7405752e6fb83bc.html#(16))
 >><br>--**未完** [rvest](https://www.rdocumentation.org/packages/rvest/versions/0.3.2)
 
 >-Rmarkdown
@@ -59,7 +59,7 @@
 >><br>--**未完**[R_Facebook_crawler_text_mining_Rstudio](https://kangliping.wordpress.com/2017/04/27/r_text_mining_fanpage_rstudio/)
 
 >-R Text Mining
->>--**未完**[An introduction to data cleaning with R](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
+>>--**未完** [An introduction to data cleaning with R](https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf)
 >><br>--[用R進行中文 text Mining](http://rstudio-pubs-static.s3.amazonaws.com/12422_b2b48bb2da7942acaca5ace45bd8c60c.html)
 >><br>--[R文本挖掘之tm包](http://yphuang.github.io/blog/2016/03/04/text-mining-tm-package/)
 >><br>--[R 文字探勘概略筆記 by jiebaR](http://kanchengzxdfgcv.blogspot.tw/2017/04/r-by-jiebar.html)
