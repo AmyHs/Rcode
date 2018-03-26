@@ -45,6 +45,15 @@
 >><br>--[Markdown文件](http://markdown.tw/#em)
 
 
+## WEEK 3
+
+### In class:
+
+### At home:
+>-apply family
+>>--[掌握R语言中的apply函数族](http://blog.fens.me/r-apply/)
+
+
 ##  WEEK 4
 
 ### In class:
