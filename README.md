@@ -76,3 +76,12 @@
 
 >-wordcloud
 >>--[Package ‘wordcloud’](https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf)
+
+## WEEK 5
+
+### In class:
+
+### At home:
+>-Review
+>>--visualization:
+>>>---[R for Data Science: Data visualisation](http://r4ds.had.co.nz/data-visualisation.html)
