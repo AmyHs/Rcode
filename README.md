@@ -83,7 +83,9 @@
 
 ### At home:
 >-Review
+
 >>--R basic:
 >>>---[R for Data Science ch4: Workflow basics (基本介紹)](http://r4ds.had.co.nz/workflow-basics.html)
->><br>--visualization:
->>><br>---[R for Data Science ch3: Data visualisation (ggplot)](http://r4ds.had.co.nz/data-visualisation.html)
+
+>>--visualization:
+>>>---[R for Data Science ch3: Data visualisation (ggplot2)](http://r4ds.had.co.nz/data-visualisation.html)
