@@ -86,4 +86,4 @@
 >>--R basic:
 >>>---[R for Data Science ch4: Workflow basics (基本介紹)](http://r4ds.had.co.nz/workflow-basics.html)
 >><br>--visualization:
->>>---[R for Data Science ch3: Data visualisation (ggplot)](http://r4ds.had.co.nz/data-visualisation.html)
+>>><br>---[R for Data Science ch3: Data visualisation (ggplot)](http://r4ds.had.co.nz/data-visualisation.html)
