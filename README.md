@@ -89,3 +89,4 @@
 
 >>--visualization:
 >>>---[R for Data Science ch3: Data visualisation (ggplot2)](http://r4ds.had.co.nz/data-visualisation.html)
+>>><br>---**未完**[Quick Guide to Data Journalism](https://www.datacamp.com/community/blog/data-journalism-guide-tools)
