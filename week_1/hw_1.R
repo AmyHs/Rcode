@@ -4,17 +4,16 @@
 ########################################################### Task 1
 
 # 查看內建資料集: 鳶尾花(iris)資料集
-require(datasets)
-data(iris)
+iris
 
 # 使用dim(), 回傳iris的列數與欄數
 dim(iris)
 
 # 使用head() 回傳iris的前六列
-head(iris, n = 6)
+head(iris)
 
 # 使用tail() 回傳iris的後六列
-tail(iris, n=6)
+tail(iris)
 
 # 使用str() 
 str(iris)
@@ -27,77 +26,47 @@ summary(iris)
 # 使用for loop 印出九九乘法表
 # Ex: (1x1=1 1x2=2...1x9=9 ~ 9x1=9 9x2=18... 9x9=81)
 
-
-for(a in c(1:9)){
-  for(b in c(1:9)){
-    c<-paste( a,"x",b,"=",a*b)
-    print(c)}
+for(i in 1:9){
+  for(j in 1:9){
+    print(paste(i,"*",j,"=",i*j))
   }
-
-for(a in c(1:9)){
-  b<-paste("偶數且大於50:",2*a+50))
-  print(b)}
-
+}
 ########################################################### Task 3
 
 # 使用sample(), 產出10個介於10~100的整數，並存在變數 nums
-x<-10:100
-nums<-sample(x,10)
+nums<-sample(10:100,10)
 
 # 查看nums
 nums
-
 # 1.使用for loop 以及 if-else，印出大於50的偶數，並提示("偶數且大於50": 數字value)
 # 2.特別規則：若數字為66，則提示("太66666666666了")並中止迴圈。
-for( i in c(1:100)){
- if (50+2*i != 66){
-  m<-paste("偶數且大於50:",50+2*i)
-  print(m)
-  }
-  
- else if(50+2*i>= 66){
-  print("太66666666666了")
-  break}
-}  
 
-x=800
-if (x%%4 !== 0){
-  a<-paste(X,"不是閏年")
-  print(a)
+for(i in nums){
+  if(i>50 & i%%2==0 & i != 66){
+    print(paste("偶數且大於50:",i))
+  }else if(i == 66){
+    print("太66666666666了")
+    break
+  }
 }
-else if(x%%100== 0 & x%%400 !=0){
-  b<-paste(x,"不是閏年")
-  print(b)
-}
-else if(x%%4 ==0 & x%%100 !=0){
-  c<-paste(x,"是閏年")
-  print(c)
-}
-else if (x%%400 == 0){
-  d<-paste(x,"是閏年")
-  print(d)
-}
+
+
+
+
+
 ########################################################### Task 4
 
 # 請寫一段程式碼，能判斷輸入之西元年分 year 是否為閏年
-year<-function(x){
-  if (x%%4 !== 0){
-    a<-paste(x,"不是閏年")
-    print(a)
-  }
-  else if(x%%100 == 0 & x%%400 !=0){
-    b<-paste(x,"不是閏年")
-    print(b)
-  }
-  else if(x%%4 == 0 & x%%100 !=0){
-    c<-paste(x,"是閏年")
-    print(c)
-  }
-  else if (x%%400 == 0){
-    d<-paste(x,"是閏年")
-    print(d)
+year<-function(i){
+  if(i%%4==0 & i%%100 !=0 || i%%400==0 & i%%3200 != 0){
+    print("閏年")
+  }else{ 
+      print("平年")
   }
 }
+
+
+
 
 ########################################################### Task 5
 
@@ -105,5 +74,35 @@ year<-function(x){
 # 1. 請寫一個由電腦隨機產生不同數字的四位數(1A2B遊戲)
 # 2. 玩家可重覆猜電腦所產生的數字，並提示猜測的結果(EX:1A2B)
 # 3. 一旦猜對，系統可自動計算玩家猜測的次數
-GuessNum<-function(h)
-  
+ans<-sample(0:9,4)
+num<-0
+repeat{
+  print("請輸入不重複由0~9組成的四個數字(隨1,2,3,4一個一個數輸入)")
+  guess <- scan(n=4)
+  a <- 0
+  b <- 0
+  num <- num + 1
+
+  #檢查幾A幾B
+
+  for(i in 1:4){
+    if(guess[i]==ans[i]) a<-a+1
+  }
+  b <- sum(guess%in% ans)-a
+  #猜錯繼續
+    if (a != 4){
+    cat("你猜錯了，再猜一次!\n","猜測次數：",num,"\n",paste(a,"A",b,"B"),"\n")
+  }
+  #猜對停止
+  else if (a == 4){
+    cat("你猜對了!\n","猜測次數：",num,"\n")
+    break
+  }
+}
+
+ 
+
+ 
+
+
+

@@ -66,24 +66,15 @@ inspect(docs2)
 
 #wordcloud
 library(wordcloud2)
-docmat<- TermDocumentMatrix(docs3, control = list(wordLengths = c(2, Inf)))%>%as.matrix()
+#Encoding(docs1[1])  <- "UTF-8"
+temp <- Corpus(VectorSource(docs1[1]))
+docmat<- TermDocumentMatrix(temp, control=list(wordLengths = c(1, Inf)))
+#docmat<- TermDocumentMatrix(temp)
+docmat<-as.matrix(docmat)
 fre <- sort(rowSums(docmat), decreasing = TRUE)
 df<- data.frame(word = names(fre), freq = fre)
-
 wordcloud2(df)
-mixseg = worker()
-jieba_tokenizer=function(d){
-  unlist(segment(d[[1]],mixseg))
-}
-seg = lapply(docs, jieba_tokenizer)
-freqFrame = as.data.frame(table(unlist(seg)))
-freqFrame = freqFrame[-c(1:34),]
-wordcloud(freqFrame$Var1,freqFrame$Freq,
-          scale=c(5,0.5),min.freq=10,max.words=50,
-          random.order=FALSE, random.color=TRUE, 
-          rot.per=0, colors=brewer.pal(8, "Dark2"),
-          ordered.colors=FALSE,use.r.layout=FALSE,
-          fixed.asp=TRUE)
+
 #®³¨Ó°µw4¤ÀªR
 
 page1<-select(page,-starts_with("from"),-type,-story)%>%
