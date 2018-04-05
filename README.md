@@ -76,3 +76,17 @@
 
 >-wordcloud
 >>--[Package ‘wordcloud’](https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf)
+
+## WEEK 5
+
+### In class:
+
+### At home:
+>-Review
+
+>>--R basic:
+>>>---[R for Data Science ch4: Workflow basics (基本介紹)](http://r4ds.had.co.nz/workflow-basics.html)
+
+>>--visualization:
+>>>---[R for Data Science ch3: Data visualisation (ggplot2)](http://r4ds.had.co.nz/data-visualisation.html)
+>>><br>---**未完**[Quick Guide to Data Journalism](https://www.datacamp.com/community/blog/data-journalism-guide-tools)
