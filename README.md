@@ -88,5 +88,6 @@
 >>>---[R for Data Science ch4: Workflow basics (基本介紹)](http://r4ds.had.co.nz/workflow-basics.html)
 
 >>--visualization:
->>>---[R for Data Science ch3: Data visualisation (ggplot2)](http://r4ds.had.co.nz/data-visualisation.html)
+>>>---[R for Data Science ch3: Data visualisation (ggplot2基礎介紹)](http://r4ds.had.co.nz/data-visualisation.html)
+>>>---<br>[R4DS' excercises: Nate Day (ggplot2基礎介紹 與上面搭配服用)](https://www.nateday.me/r4ds_exercises.html)
 >>><br>---**未完**[Quick Guide to Data Journalism](https://www.datacamp.com/community/blog/data-journalism-guide-tools)
