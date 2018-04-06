@@ -89,6 +89,7 @@
 
 >>--visualization:
 >>>---[R for Data Science ch3: Data visualisation (ggplot2基礎介紹)](http://r4ds.had.co.nz/data-visualisation.html)
->>><br>---[R4DS' excercises: Nate Day (ggplot2基礎介紹 與上面搭配服用)](https://www.nateday.me/r4ds_exercises.html)
->>><br>---[ggplot2入門與進階 (中文ggplot2介紹 較上面詳細)](http://www.cellyse.com/how_to_use_gggplot2_part1/)
+>>><br>---[R4DS' excercises: Nate Day (ggplot2基礎介紹解答 與上面搭配服用)](https://www.nateday.me/r4ds_exercises.html)
+>>><br>---[R4DS' excercises: cimentadaj (ggplot2基礎介紹解答 與上面搭配服用)](https://github.com/cimentadaj/R4DS-Solutions/)
+>>><br>---[ggplot2入門與進階 (中文ggplot2介紹 )](http://www.cellyse.com/how_to_use_gggplot2_part1/)
 >>><br>---**未完**[Quick Guide to Data Journalism ](https://www.datacamp.com/community/blog/data-journalism-guide-tools)
