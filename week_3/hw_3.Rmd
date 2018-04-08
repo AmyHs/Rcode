@@ -8,32 +8,32 @@ output: html_document
 -建立一命名為week_3(or task_3, hw_3)的資料夾。
 <br>-完成一份資料視覺化小作品上傳至資料夾中，須繳交兩份檔案[.Rmd, .html)]。
 
-###剛好實驗室要來解讀行為資料，決定來視覺化實驗資料
-####player1,player2兩人進行股票買賣的遊戲(股價會因為雙方買賣波動)
-####最後輸贏看雙方的總資產誰多，贏多實驗受試者費會跟著提高，輸了會降低
-####從行為看人們的Theory of Mind 能力
+#剛好實驗室要來解讀行為資料，決定來視覺化實驗資料
+#player1,player2兩人進行股票買賣的遊戲(股價會因為雙方買賣波動)
+#最後輸贏看雙方的總資產誰多，贏多實驗受試者費會跟著提高，輸了會降低
+#從行為看人們的Theory of Mind 能力
 ```{r}
 setwd("C:/Users/b0520/Desktop")
 data<-read.csv("20171027_01_1.csv")
 ```
 
-###繪製player1&player2資產變化
+#繪製player1&player2資產變化
 ```{r}
 library(tidyverse)
-total<-ggplot(data,mapping = aes(data$trials, data$player1TotalAsset))+geom_point(color ="pink")+geom_smooth(color ="pink",se = F)+
+ggplot(data,mapping = aes(data$trials, data$player1TotalAsset))+geom_point(color ="pink")+geom_smooth(color ="pink",se = F)+
   geom_point(aes(data$trials,data$player2TotalAsset),color ="yellow")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="yellow",se = F)
 ```
 
-###player1&2股票與現金數量和總資產變化的關係
+#player1&2股票與現金數量和總資產變化的關係
 ```{r}
-player1<-ggplot(data)+geom_point(aes(data$trial,data$player1Cash, shape = player1Decision),color ="red")+geom_smooth(aes(data$trials,data$player1TotalAsset),color ="lightpink")
-player2<-ggplot(data)+geom_point(aes(data$trial,data$player2Cash, shape = player2Decision),color ="#006666")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="#33FFFF")                                                       
-playerdata<-ggplot(data)+geom_point(aes(data$trial,data$player1Cash, shape = player1Decision),color ="red")+geom_smooth(aes(data$trials,data$player1TotalAsset),color ="lightpink")+geom_point(aes(data$trial,data$player2Cash, shape = player2Decision),color ="#006666")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="#33FFFF")
+ggplot(data)+geom_point(aes(data$trial,data$player1Cash, shape = player1Decision),color ="red")+geom_smooth(aes(data$trials,data$player1TotalAsset),color ="lightpink")
+ggplot(data)+geom_point(aes(data$trial,data$player2Cash, shape = player2Decision),color ="#006666")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="#33FFFF")                                                       
+ggplot(data)+geom_point(aes(data$trial,data$player1Cash, shape = player1Decision),color ="red")+geom_smooth(aes(data$trials,data$player1TotalAsset),color ="lightpink")+geom_point(aes(data$trial,data$player2Cash, shape = player2Decision),color ="#006666")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="#33FFFF")
 ```
 
-###上面完成已經可以與事後問卷來進行行為資料分析了
-###但想知道受試者的買賣對股價的影響
-###畫一張股價與雙方買賣的關係圖
+#上面完成已經可以與事後問卷來進行行為資料分析了
+#但想知道受試者的買賣對股價的影響
+#畫一張股價與雙方買賣的關係圖
 ```{r}
 library(reshape2)
 

@@ -128,39 +128,39 @@ $(document).ready(function () {
 <div id="week_2-task" class="section level1">
 <h1>week_2 Task</h1>
 <p>-建立一命名為week_2(or task_2, hw_2)的資料夾。 <br>-完成一支網站爬蟲上傳至資料夾中，繳交三種類型檔案(.R, .Rmd, .html)。</p>
-<div id="imdb250" class="section level2">
-<h2>決定來看看IMDb上評分最高的250部電影有哪些，列入之後的待看清單</h2>
 </div>
-<div class="section level2">
-<h2>先載入要用的套件</h2>
+<div id="imdb250" class="section level1">
+<h1>決定來看看IMDb上評分最高的250部電影有哪些，列入之後的待看清單</h1>
+</div>
+<div class="section level1">
+<h1>先載入要用的套件</h1>
 <pre class="r"><code>library(rvest)</code></pre>
 <pre><code>## Loading required package: xml2</code></pre>
 <pre class="r"><code>library(magrittr)</code></pre>
 </div>
-<div class="section level2">
-<h2>取得網址</h2>
+<div class="section level1">
+<h1>取得網址</h1>
 <pre class="r"><code>url&lt;-read_html(&quot;http://www.imdb.com/chart/top?pf_rd_m=A2FGELUUNOQJNL&amp;pf_rd_p=4da9d9a5-d299-43f2-9c53-f0efa18182cd&amp;pf_rd_r=17BXDA2B9WWHC96K70QD&amp;pf_rd_s=right-4&amp;pf_rd_t=15506&amp;pf_rd_i=toptv&amp;ref_=chttvtp_ql_3&quot;)</code></pre>
 </div>
-<div id="top250" class="section level2">
-<h2>取得電影top250，想要電影縮圖、名稱、個別電影網址、還有評分</h2>
+<div id="top250" class="section level1">
+<h1>取得電影top250，想要電影縮圖、名稱、個別電影網址、還有評分</h1>
 <pre class="r"><code>movieimg&lt;-html_nodes(url,&quot;.posterColumn&quot;)%&gt;%html_nodes(&quot;img&quot;)%&gt;%html_attr(&quot;src&quot;)
 title&lt;-html_nodes(url,&quot;.titleColumn&quot;)%&gt;%html_text(.,trim = T)
 movieUrl&lt;-html_nodes(url,&quot;.titleColumn&quot;)%&gt;%html_nodes(&quot;a&quot;)%&gt;%html_attr(&quot;href&quot;)%&gt;%paste(&quot;http://www.imdb.com&quot;,.)
 rating&lt;-html_nodes(url,&quot;.imdbRating&quot;)%&gt;%html_text()</code></pre>
 </div>
-<div class="section level2">
-<h2>做成表格</h2>
+<div class="section level1">
+<h1>做成表格</h1>
 <pre class="r"><code>df&lt;-data.frame(image = movieimg, movie = title, rating, url = movieUrl, stringsAsFactors=FALSE)</code></pre>
 </div>
-<div class="section level2">
-<h2>來做一個不需要網址、圖片只需要電影和評分的表格</h2>
+<div class="section level1">
+<h1>來做一個不需要網址、圖片只需要電影和評分的表格</h1>
 <pre class="r"><code>df_for_reading&lt;-df[,c(-1,-4)]</code></pre>
 </div>
-<div id="csv" class="section level2">
-<h2>存成csv</h2>
+<div id="csv" class="section level1">
+<h1>存成csv</h1>
 <pre class="r"><code>setwd(&quot;C:/Users/b0520/Desktop/csx_R_course&quot;)
 write.table(df_for_reading,file = &quot;TopMovies.csv&quot;,sep = &quot;,&quot;,row.names = F)</code></pre>
-</div>
 </div>
 
 
