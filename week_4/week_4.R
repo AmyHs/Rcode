@@ -1,40 +1,64 @@
-#1.¨ú±ofb¤Wªºpost
+#1.å–å¾—fbä¸Šçš„post
 library(Rfacebook)
 id<-"184899118190398"
-token<-"EAACEdEose0cBAKOqO9zOMPReUgcYhWwIwA1dVhERCs7NxIDYfkeK35p8PDYMHNlZCJNKUdc09OWY8waqswaJBwhmhguZB9nTbx2MP8evF8kDSNwZAiv9LFSZArmwRGzXkbWRv3eNVO10gqBjVEi2zXr2KdRWXaCcdExc02CSNqbzWNICp8T0Y3uupMzvDs4ZD"
+token<-"EAACEdEose0cBAO8kU8MBlZCFymdZBuddkKpd0UOBjdGgOZB3pzO1COCujgKwAx8byMQE6WnfSk6cJZCZCwyfHoR5QAtUZAYeyI2m4eD1VHrd4uBekanNU0AVldJxKiRruFc6GEJsBeZAnGPXsXpM5UbiTm88cvHW3OjmjnQ5ZA23wuu8hMO3EAxMY6hAnGgIU2AZD"
 post<-getPage(id,token,n=500)
 
-#2.³Ì¨üÅwªïªº«e300½g¸Ìªº¤å¦r
+#2.æœ€å—æ­¡è¿çš„å‰300ç¯‡è£¡çš„æ–‡å­—
 library(dplyr)
 library(magrittr)
 post1<-arrange(post,desc(likes_count))
 doc<-post1[1:300,]%$%message
 
-#3.¤å¦r¾ã²z
-#3.1Â_µü
-library(jiebaR)
-cut=worker()
-newword<-c("¤@­Ó¤H","³Q·R","¹ïªº¤H")
-new_user_word(cut,newword)
-word<-jiebaR::segment(doc,cut)
-#3.2²M¬~¤å¦r
+#3.æ–‡å­—æ•´ç†
+#3.1æ¸…æ´—æ–‡å­—
 library(tm)
-word1<-VCorpus(VectorSource(word))
-##«Dtm¦Û±a¨ç¼Æ¥Îcontent_transformer()¡§¥]???¡¨°_???¤~¯à¥Î
+docs1<-VCorpus(VectorSource(doc))
+##étmè‡ªå¸¶å‡½æ•¸ç”¨content_transformer()åŒ…èµ·æ‰èƒ½ç”¨
 space<-content_transformer(function (x, pattern){gsub(pattern," ",x)})
-word2<-tm_map(word1,space,"[a-zA-Z]")
-word2<-tm_map(word2,removeNumbers)
-word2<-tm_map(word2,removeWords,stopwordsCN())
+docs2<-tm_map(docs1,space,"[a-zA-Z]")
+docs2<-tm_map(docs2,removeNumbers)
+docs2<-tm_map(docs2, removePunctuation)
+docs2<-tm_map(docs2, stripWhitespace)
 
- #4.­pºâµüÀW
-wordnum<-length(word2)
+#3.2æ–·è©&å»é™¤åœç”¨å­—
+library(jiebaR)
+setwd("C:/Users/b0520/Desktop")
+cut=worker(,stop_word ="stop.txt")
+newword<-c("ä¸€å€‹äºº","è¢«æ„›","å°çš„äºº")
+new_user_word(cut,newword)
 allword<-list()
-allfreq<-list()
-##¦¹§@ªk¨S¦³§â¦r¥ıappend°_¨Ó·|¤£¨£¡A¦]¬°¦Ñ®vªºdoc¤w¸g¬O«Ü¦h¦r¦b¸Ì­±¡A§Úªº¬O¤@­Ó¤@­Ó
-for(i in 1:wordnum){
-  word<-as.data.frame(table(word2[[i]][1]))
-  allword<-append(allword,word)
+docsnum<-length(docs2)
+for(i in 1:docsnum){
+   word<-list(jiebaR::segment(unlist(docs2[[i]][1]),cut))
+   allword<-append(allword,word)
 }
 
-qq<-as.data.frame(table(allword))
-View(head(qq))
+#4.è¨ˆç®—è©é »
+allfreq<-list()
+for(i in 1:docsnum){
+  freq<-list(as.data.frame(table(allword[i])))
+  colnames(freq[[1]])<-c("word","freq")
+  allfreq<-append(allfreq,freq)
+}
+#5.æ–‡å­—é›²
+jieba_tokenizer=function(d){
+  unlist(segment(d[[1]],cut))
+}
+seg = lapply(docs2, jieba_tokenizer)
+freqFrame <- as.data.frame(table(unlist(seg)))
+freqFrame <-freqFrame[-c(1:27),]
+wordcloud(freqFrame$Var1,freqFrame$Freq)
+
+#ç‚ºä»€éº¼æ–‡å­—é›²ç•«ä¸å‡ºä¾†å—šå—šå—š
+library(wordcloud2)
+letterCloud(freqFrame, word = "F",color = "random-light",backgroundColor = "black",size = 0.3)
+
+#5.300ç¯‡æ–‡ç« çš„å­—è©è©é »åˆä½µ
+alltable = allfreq[[1]]
+for( m in 1:299 )
+{
+  alltable = merge(alltable, allfreq[[m+1]], by="word",all = T)
+}
+
+

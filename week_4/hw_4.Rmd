@@ -1,0 +1,84 @@
+---
+title: "week4"
+author: "AmyHs"
+date: "2018年4月8日"
+output: html_document
+---
+#week_4任務
+-建立一命名為 week_4(or task_4, hw_4)的資料夾。
+<br>-完成一份由透過社群網站 Open API 取得文本的文字雲上傳至資料夾中，須繳交兩份檔案[.Rmd, .html)]。
+
+###女人迷的網站給人溫暖的感覺，是否跟他的用字有關
+###分析女人迷裡近期最受歡迎的300篇文章，通常有哪些字
+###1.取得fb上的post
+```{r}
+library(Rfacebook)
+id<-"184899118190398"
+token<-"EAACEdEose0cBAOI4OA31H16eZBcQzwZCsR9KDhCI9wGJo1gXW6CoN039ZADInm3cuTYeJuXb9eU2eBXIT7jsn30ZBqK708sUAIcHpu2uQ6OLzTrJVNjjTmIxdblxuobKsetFn6WSPlLcNYgRkOBtzqzozcd8YXlOpWZCYJ5BZAhrZCFyYjVhZA2NNtAnwKbJzXUZD"
+post<-getPage(id,token,n=500)
+```
+
+###2.最受歡迎的前300篇裡的文字
+```{r}
+library(dplyr)
+library(magrittr)
+post1<-arrange(post,desc(likes_count))
+doc<-post1[1:300,]%$%message
+```
+
+###3.文字整理
+####3.1清洗文字
+```{r}
+library(tm)
+docs1<-VCorpus(VectorSource(doc))
+#不懂範例的tospace functon在做什麼→非tm自帶函數用content_transformer()包起才能用
+#也不懂gsub在做什麼→文字取代
+space<-content_transformer(function (x, pattern){gsub(pattern," ",x)})
+docs2<-tm_map(docs1,space,"[a-zA-Z]")
+docs2<-tm_map(docs2,removeNumbers)
+docs2<-tm_map(docs2, removePunctuation)
+docs2<-tm_map(docs2, stripWhitespace)
+```
+
+####3.2斷詞&去除停用字準備
+```{r}
+library(jiebaR)
+
+#本來停用字要用tm中的stopwordCN()，但是試了很多次發現斷字的結果不太滿意
+#而且段完之後所有的文本就變成一個詞一個詞，嘗試了將之合併回300篇文章存成list，但是失敗
+#改用jeibaR的方式斷詞
+#載入自行調整的停用字詞
+setwd("C:/Users/b0520/Desktop")
+cut=worker(,stop_word ="stop.txt")
+#這三組字在女人迷的文章裡常常是重點，以防斷錯詞
+newword<-c("一個人","被愛","對的人")
+new_user_word(cut,newword)
+```
+
+###5.文字雲
+####5.1斷詞
+```{r}
+jieba_tokenizer=function(d){
+  unlist(segment(d[[1]],cut))
+}
+seg = lapply(docs2, jieba_tokenizer)
+
+```
+####5.2計算詞頻
+```{r}
+freqFrame <- as.data.frame(table(unlist(seg)))
+freqFrame <-freqFrame[-c(1:27),]
+
+```
+####5.3畫文字雲
+```{r}
+library(wordcloud)
+wordcloud(freqFrame$Var1,freqFrame$Freq,
+          scale=c(5,0.5),min.freq=5,max.words=50,
+          random.order=FALSE, random.color=TRUE, 
+          rot.per=0, colors=brewer.pal(8, "Dark2"),
+          ordered.colors=FALSE,use.r.layout=FALSE,
+          fixed.asp=TRUE)
+```
+
+####畫出來的文字的確符合我對女人迷的認識，重視主體、客體之間的互動關係，不論是你、我、他都是重點探索的面向，而且充滿了平凡生活會出現的大小事，出現了朋友、工作、感情等字，符合平常文章內幫助女性平衡生活各個面向的主題。
