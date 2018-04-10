@@ -1,0 +1,52 @@
+#想知道Freud到底有沒有像老師說的是個dirty old man
+
+library(readtext)
+library(tm)
+library(magrittr)
+
+#載入著名的夢的解析
+doc<-readtext("C:/Users/b0520/Desktop/dream.txt",encoding = "utf8")
+
+#文本轉換成tm可以處裡的格式然後進行清洗
+doc1 <- Corpus(VectorSource(doc))%>%
+  tm_map(.,stripWhitespace)%>% #空白
+  tm_map(.,removeNumbers)%>% #數字
+  tm_map(.,removePunctuation)%>% #標點
+  tm_map(.,tolower)%>% #大小寫轉換
+  tm_map(.,removeWords,stopwords("english")) #消除停止詞
+
+#text minig前置作業
+
+##Stemming
+doc2 <- tm_map(doc1,stemDocument, language="english")
+#出現error message:there is no package called ‘SnowballC’
+#上網查發現是舊的tm包移除了SnowballC要更新再載入
+update.packages("tm",  checkBuilt = TRUE)
+install.packages("SnowballC")
+library(SnowballC)
+doc2 <- tm_map(doc1,stemDocument, language="english")
+#文件太大用readline看一下
+writeLines(as.character(doc2[[1]]))
+
+#讓doc2變成text documents
+doc2<- tm_map(doc2, PlainTextDocument)
+
+#建立矩陣
+dtmDream <-DocumentTermMatrix(doc2,control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE)))
+tdmDream <- TermDocumentMatrix(doc2) 
+#看一下data
+mat <- as.matrix(dtmDream) 
+freq <- colSums(as.matrix(mat)) 
+order <- order(freq)
+#詞頻
+freq <- sort(colSums(mat), decreasing=TRUE) 
+df<- data.frame(word=names(freq), freq=freq) 
+df
+
+#視覺化
+library(ggplot2) 
+p <- ggplot(subset(df, freq>50), aes(x = reorder(word, -freq), y = freq)) +
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+library(wordcloud)
+wordcloud(names(freq), freq, max.words=100, rot.per=0.2)  
