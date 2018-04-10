@@ -93,3 +93,7 @@
 >>><br>---[R4DS' excercises: cimentadaj (ggplot2基礎介紹解答 與上面搭配服用)](https://github.com/cimentadaj/R4DS-Solutions/)
 >>><br>---[ggplot2入門與進階 (中文ggplot2介紹 )](http://www.cellyse.com/how_to_use_gggplot2_part1/)
 >>><br>---**未完**[Quick Guide to Data Journalism ](https://www.datacamp.com/community/blog/data-journalism-guide-tools)
+
+>>--EDA:
+>>>---[Advanced EDA with R (以Ubike為例介紹EDA和各種視覺化的結合)](https://dspim.github.io/A1-EDA-R/advanced-EDA.html)
+>>><br>---[]()
