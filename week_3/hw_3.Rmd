@@ -1,0 +1,73 @@
+---
+title: "week3"
+author: "AmyHs"
+date: "2018年4月8日"
+output: html_document
+---
+#week_3 Task
+-建立一命名為week_3(or task_3, hw_3)的資料夾。
+<br>-完成一份資料視覺化小作品上傳至資料夾中，須繳交兩份檔案[.Rmd, .html)]。
+
+#剛好實驗室要來解讀行為資料，決定來視覺化實驗資料
+#player1,player2兩人進行股票買賣的遊戲(股價會因為雙方買賣波動)
+#最後輸贏看雙方的總資產誰多，贏多實驗受試者費會跟著提高，輸了會降低
+#從行為看人們的Theory of Mind 能力
+```{r,include=TRUE}
+setwd("C:/Users/b0520/Desktop")
+data<-read.csv("20171027_01_1.csv")
+```
+
+#繪製player1&player2資產變化
+```{r,include=TRUE}
+library(tidyverse)
+ggplot(data,mapping = aes(data$trials, data$player1TotalAsset))+geom_point(color ="pink")+geom_smooth(color ="pink",se = F)+
+  geom_point(aes(data$trials,data$player2TotalAsset),color ="yellow")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="yellow",se = F)
+```
+
+#player1&2股票與現金數量和總資產變化的關係
+```{r,include=TRUE}
+ggplot(data)+geom_point(aes(data$trial,data$player1Cash, shape = player1Decision),color ="red")+geom_smooth(aes(data$trials,data$player1TotalAsset),color ="lightpink")
+ggplot(data)+geom_point(aes(data$trial,data$player2Cash, shape = player2Decision),color ="#006666")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="#33FFFF")                                                       
+ggplot(data)+geom_point(aes(data$trial,data$player1Cash, shape = player1Decision),color ="red")+geom_smooth(aes(data$trials,data$player1TotalAsset),color ="lightpink")+geom_point(aes(data$trial,data$player2Cash, shape = player2Decision),color ="#006666")+geom_smooth(aes(data$trials,data$player2TotalAsset),color ="#33FFFF")
+```
+
+#上面完成已經可以與事後問卷來進行行為資料分析了
+#但想知道受試者的買賣對股價的影響
+#畫一張股價與雙方買賣的關係圖
+```{r,include=TRUE}
+library(reshape2)
+
+##先把player1,2的資料轉成長資料
+data1<-select(data,starts_with("player"),-ends_with("event"),-ends_with("Stock"),stockPrice,marketCondition)
+data2<-select(data,trials,player1Stock,player2Stock)%>%melt(id.var="trials",variable.name="player")%>%cbind(.,data1)
+
+###本來要直接用reshape裡的melt一欄一欄進行，但因為要寫很多保留欄然後分別進行很多次所以放棄
+###改用各自合併再併起來的方法
+data2<-select(data,trials,player1Stock,player2Stock)%>%melt(id.var="trials",variable.name="playerStock",value.name = "Stock_value")
+data3<-select(data,trials,player1Cash,player2Cash)%>%melt(id.var="trials",variable.name="playerCash",value.name = "Cash_value")
+data4<-select(data,trials,player1TotalAsset,player2TotalAsset)%>%melt(id.var="trials",variable.name="playerTotalAsset",value.name = "Total_value")
+data5<-select(data,trials,player1Decision,player2Decision)%>%melt(id.var="trials",variable.name="playerDecision",value.name = "Decision")
+data6<-select(data,trials,marketCondition,stockPrice)
+
+###[未解決]本來要用merge合併但是併起來的方式卻導致trial數越來越多
+###上網查了資料可能跟聯集有關，但儘管用了交集而不是聯集也沒改善
+data1<-merge.data.frame(data2,data3,by = "trials",all =F)%>%merge.data.frame(.,data4,by = "trials")%>%merge.data.frame(.,data5,by = "trials")%>%merge.data.frame(.,data6,by = "trials")
+
+###改增加ID來合併而不是用trial來合併
+data2<-select(data,trials,player1Stock,player2Stock)%>%melt(id.var="trials",variable.name="playerStock",value.name = "Stock_value")%>%mutate(.,ID = 1:202)
+data3<-select(data,trials,player1Cash,player2Cash)%>%melt(id.var="trials",variable.name="playerCash",value.name = "Cash_value")%>%mutate(.,ID = 1:202)
+data4<-select(data,trials,player1TotalAsset,player2TotalAsset)%>%melt(id.var="trials",variable.name="playerTotalAsset",value.name = "Total_value")%>%mutate(.,ID = 1:202)
+data5<-select(data,trials,player1Decision,player2Decision)%>%melt(id.var="trials",variable.name="playerDecision",value.name = "Decision")%>%mutate(.,ID = 1:202)
+data6<-select(data,trials,marketCondition,stockPrice)%>%mutate(.,ID = 1:101)
+data7<-select(data,trials,marketCondition,stockPrice)%>%mutate(.,ID = 102:202)
+
+###[未解決]為什麼都會跑出trials.x trials.y
+###查了一下發現這是正常的，彼此合併依據的ID底下其他欄位不同就會產生這個
+
+###[未解決]data 6 行數不一樣，這樣沒辦法併起來 ###把data6、data7用不同ID命名,想說可以分開併起來，結果會變成兩個有缺失值的欄位，並不是我要
+###查了很多交集聯集，或者其他合併欄位或datdaframe的方法，還是無法讓資料根據ID併起來，而不會stockPrice maketCondition出現四欄 裡面有NA
+###放棄這個測試
+```
+
+
+
