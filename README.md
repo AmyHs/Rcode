@@ -96,4 +96,5 @@
 
 >>--EDA:
 >>>---[Advanced EDA with R (以Ubike為例介紹EDA和各種視覺化的結合)](https://dspim.github.io/A1-EDA-R/advanced-EDA.html)
->>><br>---[]()
+
+project1:https://github.com/AmyHs/Rcode/blob/master/week_5/project.html
