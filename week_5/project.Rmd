@@ -33,7 +33,7 @@ doc2 <- tm_map(doc1,stemDocument, language="english")
 library(SnowballC)
 doc2 <- tm_map(doc1,stemDocument, language="english")
 #文件太大用readline看一下
-writeLines(as.character(doc2[[1]]))
+#writeLines(as.character(doc2[[1]]))
 ```
 ##建立矩陣
 ```{r}
