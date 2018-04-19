@@ -17,6 +17,10 @@
 ### At home:
 >-Too busy to finish week 1 homework
 
+### HW
+>-[Week_1_HW](https://AmyHs.github.io/Rcode/week_1/hw_1.R/)
+
+
 
 ## WEEK 2
 
@@ -44,6 +48,9 @@
 >>--[以 R Markdown 輕鬆編輯資料分析報告](https://goo.gl/emKDgD)
 >><br>--[Markdown文件](http://markdown.tw/#em)
 
+### HW
+>-[Week_2_HW](https://AmyHs.github.io/Rcode/week_2/hw_2.html/)
+
 
 ## WEEK 3
 
@@ -52,6 +59,9 @@
 ### At home:
 >-apply family
 >>--[掌握R语言中的apply函数族](http://blog.fens.me/r-apply/)
+
+### HW
+>-[Week_3_HW](https://AmyHs.github.io/Rcode/week_3/hw_3.html/)
 
 
 ##  WEEK 4
@@ -77,6 +87,9 @@
 >-wordcloud
 >>--[Package ‘wordcloud’](https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf)
 
+### HW
+>-[Week_4_HW](https://AmyHs.github.io/Rcode/week_4/hw_4.html/)
+
 ## WEEK 5
 
 ### In class:
@@ -97,4 +110,8 @@
 >>--EDA:
 >>>---[Advanced EDA with R (以Ubike為例介紹EDA和各種視覺化的結合)](https://dspim.github.io/A1-EDA-R/advanced-EDA.html)
 
+### HW
+>-[Week_5_HW](https://AmyHs.github.io/Rcode/week_5/hw_5.html/)
+
 project1:https://AmyHs.github.io/Rcode/week_5/project.html
+
