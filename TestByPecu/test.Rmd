@@ -10,43 +10,43 @@ library(jiebaRD)
 ```
 # 1. get text data
 ```{r}
-#¥ı¨ú±o¦Ñ®v¤W½Ò½d¨Òªº¤å¥»
+#å…ˆå–å¾—è€å¸«ä¸Šèª²ç¯„ä¾‹çš„æ–‡æœ¬
 page <- readtext("*.txt", encoding = "big5")
-#¦]¬°µ¥µ¥¥Îªºtmªº¨ç¦¡¥u¦YCorpusÃş«¬ªºÀÉ®×©Ò¥H§â¤å¦rÀÉÂà´«
+#å› ç‚ºç­‰ç­‰ç”¨çš„tmçš„å‡½å¼åªåƒCorpusé¡å‹çš„æª”æ¡ˆæ‰€ä»¥æŠŠæ–‡å­—æª”è½‰æ›
 docs <- Corpus(VectorSource(page$text))
-#¬°¤Fµ¥¤U¼g°j°é®É¥i¥H¤@¦¸¶i¦æ«Ü¦h­Ó¤å¥»¡A©Ò¥H¥ıª¾¹D¦³´X¥÷¤å¥»
+#ç‚ºäº†ç­‰ä¸‹å¯«è¿´åœˆæ™‚å¯ä»¥ä¸€æ¬¡é€²è¡Œå¾ˆå¤šå€‹æ–‡æœ¬ï¼Œæ‰€ä»¥å…ˆçŸ¥é“æœ‰å¹¾ä»½æ–‡æœ¬
 docnum = length(page)
 ```
 # 2. tokenlized
 ```{r}
-#¦b°j°é¥H«e¥ı¥ÎjiebaR¸ÌªºÃã®wµ¥µ¥®³¨ÓÂ_µü
+#åœ¨è¿´åœˆä»¥å‰å…ˆç”¨jiebaRè£¡çš„è¾­åº«ç­‰ç­‰æ‹¿ä¾†æ–·è©
 mixseg = worker()
-#¨â­ÓªÅªºlist¨Ó©ñ¦^°é¶]¥X¨Óªºµ²ªG
+#å…©å€‹ç©ºçš„listä¾†æ”¾å›åœˆè·‘å‡ºä¾†çš„çµæœ
 Alltoken = list()
 Allfreq = list()
 for( c in 1:docnum )
 {
-  #±N¤å¥»¸Ìªº¤å¦r´£¥X¨Ó¥ÎjiebaR¤¤ªºsegment¨ç¦¡¨ÓÂ_µü¡AµM«áµ²ªG¦s¦¨list
+  #å°‡æ–‡æœ¬è£¡çš„æ–‡å­—æå‡ºä¾†ç”¨jiebaRä¸­çš„segmentå‡½å¼ä¾†æ–·è©ï¼Œç„¶å¾Œçµæœå­˜æˆlist
   token= list(jiebaR::segment(docs[[c]]$content, mixseg))
-  #¦]¬°¤£¥u¤@­Ó¤å¥»¡A©Ò¥H§Q¥Îappend¨ç¦¡Åı¨C¦¸°j°é¶]§¹²£¥Íªº·sªºµü·Jlist©MÂÂªº¦X¨Ö
+  #å› ç‚ºä¸åªä¸€å€‹æ–‡æœ¬ï¼Œæ‰€ä»¥åˆ©ç”¨appendå‡½å¼è®“æ¯æ¬¡è¿´åœˆè·‘å®Œç”¢ç”Ÿçš„æ–°çš„è©å½™listå’ŒèˆŠçš„åˆä½µ
   Alltoken = append(Alltoken, token)
   # 3. word frequency
-  #¥Îtable­pºâtoken¸Ì¦s¦nªºµü·JÀW²v¡A¦A¦s¦¨dataframe¦A¦s¦¨list
+  #ç”¨tableè¨ˆç®—tokenè£¡å­˜å¥½çš„è©å½™é »ç‡ï¼Œå†å­˜æˆdataframeå†å­˜æˆlist
   freq = list(as.data.frame(table(Alltoken[c])))
-  #¦P¤W­±¦sÂ_µüªº¤èªk
-  #¦]¬°¤£¥u¤@­Ó¤å¥»¡A©Ò¥H³z¹Lappend±N¨C¦¸°j°é¶]§¹·s²£¥Íªºµü·JÀW²vªºlist©MÂÂªº¦X¨Ö
+  #åŒä¸Šé¢å­˜æ–·è©çš„æ–¹æ³•
+  #å› ç‚ºä¸åªä¸€å€‹æ–‡æœ¬ï¼Œæ‰€ä»¥é€éappendå°‡æ¯æ¬¡è¿´åœˆè·‘å®Œæ–°ç”¢ç”Ÿçš„è©å½™é »ç‡çš„listå’ŒèˆŠçš„åˆä½µ
   Allfreq = append(Allfreq, freq)
 }
 ```
 # 4. Merge All frequency table (TermDocumentMatrix)
 ```{r}
-#¦]¬°TermDocumentMatrix¦b§Úªº¹q¸£¤W¦rµü¶]¥X¨Ó·|¬O¶Ã½X¡A©Ò¥H¥Îmerge¼g¥X¬Û¦P·§©Àªº¥\¯à
-#¦Û¤v¼gªº¤ñ¸û¦³¼u©Ê¡A¥i¥H¨Ì¦Û¤vªº»İ¨D¦X¨Ödata
-#¥Î°j°é¥i¥H¦s¤£¥u¨â­Ó¤å¥»¡A¥i¥H¦s«Ü¦h­Ó
+#å› ç‚ºTermDocumentMatrixåœ¨æˆ‘çš„é›»è…¦ä¸Šå­—è©è·‘å‡ºä¾†æœƒæ˜¯äº‚ç¢¼ï¼Œæ‰€ä»¥ç”¨mergeå¯«å‡ºç›¸åŒæ¦‚å¿µçš„åŠŸèƒ½
+#è‡ªå·±å¯«çš„æ¯”è¼ƒæœ‰å½ˆæ€§ï¼Œå¯ä»¥ä¾è‡ªå·±çš„éœ€æ±‚åˆä½µdata
+#ç”¨è¿´åœˆå¯ä»¥å­˜ä¸åªå…©å€‹æ–‡æœ¬ï¼Œå¯ä»¥å­˜å¾ˆå¤šå€‹
 AllTable = Allfreq[[1]]
 for( m in 1:1 )
 {
-  #merge¨Ó¦X¨Ö¨â­Ó¤å¥»µü·J¦s¦¨ªºdataframe
+  #mergeä¾†åˆä½µå…©å€‹æ–‡æœ¬è©å½™å­˜æˆçš„dataframe
   AllTable = merge(AllTable, Allfreq[[m+1]], by="Var1")
 }
 ```

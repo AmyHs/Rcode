@@ -1,16 +1,16 @@
 ---
 title: "week4"
 author: "AmyHs"
-date: "2018年4月8日"
+date: "2018撟?4???8?"
 output: html_document
 ---
-#week_4任務
--建立一命名為 week_4(or task_4, hw_4)的資料夾。
-<br>-完成一份由透過社群網站 Open API 取得文本的文字雲上傳至資料夾中，須繳交兩份檔案[.Rmd, .html)]。
+#week_4隞餃??
+-撱箇????? week_4(or task_4, hw_4)????冗??
+<br>-摰??隞賜??冗蝢斤雯蝡? Open API ????????銝?鞈?冗銝哨??像鈭文隞賣??.Rmd, .html)]??
 
-#女人迷的網站給人溫暖的感覺，是否跟他的用字有關
-#分析女人迷裡近期最受歡迎的300篇文章，通常有哪些字
-#1.取得fb上的post
+#憟喃犖餈瑞?雯蝡策鈭箸澈????死嚗?頝??摮???
+#???戊鈭箄蕙鋆∟?????迭餈??300蝭???虜??鈭??
+#1.???b銝?ost
 ```{r}
 library(Rfacebook)
 id<-"184899118190398"
@@ -18,7 +18,7 @@ token<-"EAACEdEose0cBAOI4OA31H16eZBcQzwZCsR9KDhCI9wGJo1gXW6CoN039ZADInm3cuTYeJuX
 post<-getPage(id,token,n=500)
 ```
 
-#2.最受歡迎的前300篇裡的文字
+#2.????迭餈???300蝭ㄐ?????
 ```{r}
 library(dplyr)
 library(magrittr)
@@ -26,13 +26,13 @@ post1<-arrange(post,desc(likes_count))
 doc<-post1[1:300,]%$%message
 ```
 
-#3.文字整理
-#3.1清洗文字
+#3.??????
+#3.1皜????
 ```{r}
 library(tm)
 docs1<-VCorpus(VectorSource(doc))
-#不懂範例的tospace functon在做什麼→非tm自帶函數用content_transformer()包起才能用
-#也不懂gsub在做什麼→文字取代
+#銝????ospace functon????暻潑??m?撣嗅??content_transformer()??絲???
+#銋??sub????暻潑????誨
 space<-content_transformer(function (x, pattern){gsub(pattern," ",x)})
 docs2<-tm_map(docs1,space,"[a-zA-Z]")
 docs2<-tm_map(docs2,removeNumbers)
@@ -40,23 +40,23 @@ docs2<-tm_map(docs2, removePunctuation)
 docs2<-tm_map(docs2, stripWhitespace)
 ```
 
-#3.2斷詞&去除停用字準備
+#3.2?閰?&????摮???
 ```{r}
 library(jiebaR)
 
-#本來停用字要用tm中的stopwordCN()，但是試了很多次發現斷字的結果不太滿意
-#而且段完之後所有的文本就變成一個詞一個詞，嘗試了將之合併回300篇文章存成list，但是失敗
-#改用jeibaR的方式斷詞
-#載入自行調整的停用字詞
+#?靘?摮?tm銝剔?topwordCN()嚗?閰虫???活???摮????云皛踵??
+#??挾摰???????撠梯??????????岫鈭???蔥???300蝭????ist嚗?憭望??
+#??jeibaR??撘閰?
+#頛?銵矽????摮??
 setwd("C:/Users/b0520/Desktop")
 cut=worker(,stop_word ="stop.txt")
-#這三組字在女人迷的文章裡常常是重點，以防斷錯詞
-newword<-c("一個人","被愛","對的人")
+#????憟喃犖餈瑞???ㄐ撣詨虜?????誑???閰?
+newword<-c("銝?犖","鋡急??","撠?犖")
 new_user_word(cut,newword)
 ```
 
-#5.文字雲
-#5.1斷詞
+#5.???
+#5.1?閰?
 ```{r}
 jieba_tokenizer=function(d){
   unlist(segment(d[[1]],cut))
@@ -64,13 +64,13 @@ jieba_tokenizer=function(d){
 seg = lapply(docs2, jieba_tokenizer)
 
 ```
-#5.2計算詞頻
+#5.2閮??
 ```{r}
 freqFrame <- as.data.frame(table(unlist(seg)))
 freqFrame <-freqFrame[-c(1:27),]
 
 ```
-#5.3畫文字雲
+#5.3????
 ```{r}
 library(wordcloud)
 wordcloud(freqFrame$Var1,freqFrame$Freq,
@@ -81,4 +81,4 @@ wordcloud(freqFrame$Var1,freqFrame$Freq,
           fixed.asp=TRUE)
 ```
 
-#畫出來的文字的確符合我對女人迷的認識，重視主體、客體之間的互動關係，不論是你、我、他都是重點探索的面向，而且充滿了平凡生活會出現的大小事，出現了朋友、工作、感情等字，符合平常文章內幫助女性平衡生活各個面向的主題。
+#??靘????Ⅱ蝚血???戊鈭箄蕙???????蜓擃恥擃??????????雿??????蝝Ｙ??????遛鈭像???暑?????之撠???鈭??極雿?????泵??像撣豢??撟怠憟單批像銵∠?暑?????蜓憿?

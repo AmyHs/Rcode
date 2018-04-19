@@ -1,57 +1,57 @@
 ---
 title: "week5"
 author: "AmyHs"
-date: "2018¦~4¤ë10¤é"
+date: "2018å¹´4æœˆ10æ—¥"
 output: html_document
 ---
-#·Qª¾¹DFreud¨ì©³¦³¨S¦³¹³¦Ñ®v»¡ªº¬O­Ódirty old man
+#æƒ³çŸ¥é“Freudåˆ°åº•æœ‰æ²’æœ‰åƒè€å¸«èªªçš„æ˜¯å€‹dirty old man
 ```{r }
 library(readtext)
 library(tm)
 library(magrittr)
 ```
-#¸ü¤JµÛ¦Wªº¹Úªº¸ÑªR
+#è¼‰å…¥è‘—åçš„å¤¢çš„è§£æ
 ```{r}
 doc<-readtext("C:/Users/b0520/Desktop/dream.txt",encoding = "utf8")
 ```
-#¤å¥»Âà´«¦¨tm¥i¥H³B¸Ìªº®æ¦¡µM«á¶i¦æ²M¬~
+#æ–‡æœ¬è½‰æ›æˆtmå¯ä»¥è™•è£¡çš„æ ¼å¼ç„¶å¾Œé€²è¡Œæ¸…æ´—
 ```{r}
 doc1 <- Corpus(VectorSource(doc))%>%
-  tm_map(.,stripWhitespace)%>% #ªÅ¥Õ
-  tm_map(.,removeNumbers)%>% #¼Æ¦r
-  tm_map(.,removePunctuation)%>% #¼ĞÂI
-  tm_map(.,tolower)%>% #¤j¤p¼gÂà´«
-  tm_map(.,removeWords,stopwords("english")) #®ø°£°±¤îµü
+  tm_map(.,stripWhitespace)%>% #ç©ºç™½
+  tm_map(.,removeNumbers)%>% #æ•¸å­—
+  tm_map(.,removePunctuation)%>% #æ¨™é»
+  tm_map(.,tolower)%>% #å¤§å°å¯«è½‰æ›
+  tm_map(.,removeWords,stopwords("english")) #æ¶ˆé™¤åœæ­¢è©
 ```
 
 #Stemming
 ```{r}
 #Stemming
 doc2 <- tm_map(doc1,stemDocument, language="english")
-#¥X²{error message:there is no package called ¡¥SnowballC¡¦
-#¤Wºô¬dµo²{¬OÂÂªºtm¥]²¾°£¤FSnowballC­n§ó·s¦A¸ü¤J
+#å‡ºç¾error message:there is no package called â€˜SnowballCâ€™
+#ä¸Šç¶²æŸ¥ç™¼ç¾æ˜¯èˆŠçš„tmåŒ…ç§»é™¤äº†SnowballCè¦æ›´æ–°å†è¼‰å…¥
 library(SnowballC)
 doc2 <- tm_map(doc1,stemDocument, language="english")
-#¤å¥ó¤Ó¤j¥Îreadline¬İ¤@¤U
+#æ–‡ä»¶å¤ªå¤§ç”¨readlineçœ‹ä¸€ä¸‹
 writeLines(as.character(doc2[[1]]))
 ```
-##«Ø¥ß¯x°}
+##å»ºç«‹çŸ©é™£
 ```{r}
-#Åıdoc2ÅÜ¦¨text documents
+#è®“doc2è®Šæˆtext documents
 doc2<- tm_map(doc2, PlainTextDocument)
-#«Ø¥ß¯x°}
+#å»ºç«‹çŸ©é™£
 dtmDream <-DocumentTermMatrix(doc2,control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE)))
 tdmDream <- TermDocumentMatrix(doc2) 
-#¬İ¤@¤Udata
+#çœ‹ä¸€ä¸‹data
 mat <- as.matrix(dtmDream) 
 freq <- colSums(as.matrix(mat)) 
 order <- order(freq)
 ```
-#µüÀW
+#è©é »
 ```{r}
 freq <- sort(colSums(mat), decreasing=TRUE) 
 df<- data.frame(word=names(freq), freq=freq) 
 
 ```
-#µ²ªG¨ä¹êÁÙ¦n¡A¨S¦³·Q¹³¤¤¨º¼Ë³£¸ò©Ê¦³Ãöªº¦L¶H
-#¤U¦¸À³¸Ó¦h¤ÀªR´X¥»¨ä¥LªºµÛ§@
+#çµæœå…¶å¯¦é‚„å¥½ï¼Œæ²’æœ‰æƒ³åƒä¸­é‚£æ¨£éƒ½è·Ÿæ€§æœ‰é—œçš„å°è±¡
+#ä¸‹æ¬¡æ‡‰è©²å¤šåˆ†æå¹¾æœ¬å…¶ä»–çš„è‘—ä½œ
