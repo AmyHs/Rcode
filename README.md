@@ -113,5 +113,11 @@
 ### HW
 >-[Week_5_HW](https://AmyHs.github.io/Rcode/week_5/hw_5.html)
 
-project1:https://AmyHs.github.io/Rcode/week_5/project.html
+## Project
+project1 : https://AmyHs.github.io/Rcode/week_5/project.html
+<br>project2 :
+<br>project3 : https://github.com/AmyHs/Rcode/blob/master/week_9_project2_Kaggle/KKBOX_final.pptx
+<br>project4 : 
+<br>project5 : 
+<br>final project : 
 
