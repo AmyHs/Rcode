@@ -1,0 +1,97 @@
+---
+title: "TitanicAnalysis"
+author: "AmyHs"
+date: "2018年5月2日"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#套件包
+```{r}
+library(tidyverse)
+```
+
+#資料
+```{r}
+setwd("C:/Users/b0520/Desktop/csx_R_course/106-2RSampleCode/week_8/task_8")
+train<-read.csv("titanicTrain.csv")
+train<-train[-c(1001:1310),]
+quest<-read.csv("titanicQuestion.csv")
+all<-rbind(train,train)
+```
+
+#資料缺失值
+```{r}
+is_na<-function(x){
+  sum(is.na(x))
+}
+sapply(train,is_na)
+sapply(quest,is_na)
+```
+
+#資料探索
+##0.1資料轉換
+```{r}
+train$survived<-as.factor(train$survived)
+train$pclass<-as.ordered(train$pclass)
+```
+
+##0.2性別與死亡
+```{r}
+sex_die<-ggplot(train[!is.na(train$survived),], aes(x = sex, fill = survived)) +
+  geom_bar(stat='count', position='dodge') + theme_grey() +
+  labs(x = 'Training data only') +
+  geom_label(stat='count', aes(label=..count..))
+```
+
+##0.3死亡與pclass
+###0.3.1 class與死亡
+```{r}
+pclass_die<-ggplot(train[!is.na(train$survived),], aes(x = pclass, fill = survived)) +
+  geom_bar(stat='count', position='dodge') + labs(x = 'Training data only') +
+  theme(legend.position="none") 
+```
+
+###0.3.2 class& sex &死亡
+```{r}
+pclass_sex_die<-ggplot(train[!is.na(train$survived),], aes(x = pclass, fill = survived)) +
+  geom_bar(stat='count', position='fill') +
+  labs(x = 'Training data only', y= "Percent") + facet_grid(.~sex) 
+```
+
+##0.4 fare&死亡
+```{r}
+train[which(train$fare==0),]
+#發現有class1&大人是fare=0，好像票價跟階級或年齡的直接關聯看不出來
+pclass_fare<-ggplot(train[!is.na(train$survived),], aes(x = fare, fill = survived)) +
+  geom_histogram( bins= 30) +
+  labs(x = 'Training data only', y= "Count") + facet_grid(.~pclass)
+#看不出什麼結果
+```
+
+##0.5 年紀與死亡
+###0.5.1先解決boat的缺失值
+```{r}
+train$boat = as.numeric(train$boat != "")
+```
+###0.5.2用現有資料預測年紀的缺失值
+```{r}
+agelm <- lm(age ~ pclass+boat+sex+parch+sibsp, data=train[!is.na(train$age),])
+#看一下哪一項預測力較好，以及R^2值
+summary(agelm)
+train$agelm<-predict(agelm,train)
+```
+###0.5.3預測結果比較
+```{r}
+hist(train$age[!is.na(train$age)], main='Original data, non-missing', xlab='age')
+hist(train$agelm, main= 'LM predictions', xlab='age', xlim=range(0:80))
+```
+###0.5.4把現有資料跟預測結果作合併
+```{r}
+indexMissingAge <- which(is.na(train$age))
+train$age[indexMissingAge] <- train$agelm[indexMissingAge]
+```
+
