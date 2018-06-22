@@ -117,7 +117,7 @@
 project1 : https://AmyHs.github.io/Rcode/week_5/project.html
 <br>project2 : https://AmyHs.github.io/Rcode/week_8_project3_Titanic/TitanicAnalysis.html 
 <br>project3 : https://github.com/AmyHs/Rcode/blob/master/week_9_project2_Kaggle/KKBOX_final.pptx
-<br>project4 : 
+<br>project4 : https://AmyHs.github.io/Rcode/week_11_project4/agri_prod_Arule.html 
 <br>project5 : https://AmyHs.github.io/Rcode/week_12_poject5_CNN/project5.html
 <br>final project : https://github.com/AmyHs/Rcode/blob/master/week_17_final/Final_project.pptx
 
